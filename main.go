@@ -7,9 +7,12 @@ import (
 	"strings"
 )
 
+// go run main.go words.go
+
 func main() {
-	fmt.Println("***Hangman***")
-	words := []string{"hello", "world", "good", "night", "golang"}
+	fmt.Println("***HangmanGame***")
+	// You can copy and paste words from words.go file or create your own words. If you don't want to do that you can run the program by typing: go run main.go words.go
+	// words := []string{"hello", "world", "good", "night", "golang"}
 	blanks := []string{}
 	lives := 5
 	letters := []string{}
@@ -19,17 +22,12 @@ func main() {
 	// seed := rand.NewSource(time.Now().Unix())
 	// r := rand.New(seed)
 	// chosen_word := words[r.Intn(len(words))]
-	fmt.Println(chosen_word)
 
-	// for _, character := range chosen_word {
-	// 	fmt.Printf("%c\n", character)
-	// }
+	// fmt.Println(chosen_word) -> see random word
 
 	for range chosen_word {
 		blanks = append(blanks, "_")
 	}
-
-	fmt.Printf("Word: %s Blanks: %s\n", chosen_word, strings.Join(blanks, ""))
 
 	for {
 		fmt.Printf("💓 %d : Guess a letter ", lives)
@@ -42,9 +40,9 @@ func main() {
 			if containsGuess {
 				fmt.Println("🚩Already guessed that letter, please try again")
 			}
-			for _, guessLetter := range guess {
+			for _, guessLetter := range guess { //iterates by index
 				correctGuess := false
-				for i, wordLetter := range chosen_word {
+				for i, wordLetter := range chosen_word { // selects the letter at that index
 					letters = append(letters, blanks[i])
 
 					if guessLetter == wordLetter {
@@ -54,7 +52,7 @@ func main() {
 				}
 				letters = append(letters, guess)
 
-				if !correctGuess {
+				if !correctGuess { // if guess not correct stays false
 					lives--
 				}
 
